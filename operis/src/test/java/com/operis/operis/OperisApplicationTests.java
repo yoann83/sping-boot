@@ -1,0 +1,13 @@
+package com.operis.operis;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class OperisApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
