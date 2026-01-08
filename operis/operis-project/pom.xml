@@ -11,6 +11,7 @@
 
     <artifactId>operis-project</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>operis-project-core</module>
         <module>operis-project-service</module>
