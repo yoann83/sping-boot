@@ -1,0 +1,14 @@
+services:
+  projectdb: # Le nom du service
+    image: mysql:latest
+    container_name: projectdb
+    ports:
+      - "4444:3306" # Redirige le port 4444 (externe) vers 3306 (interne)
+    environment:
+      MYSQL_ROOT_PASSWORD: root     # spring.datasource.password
+      MYSQL_DATABASE: operis_project # URL jdbc:.../operis_project
+    volumes:
+      - mysql_data:/var/lib/mysql   # Pour ne pas perdre les données au redémarrage
+
+volumes:
+  mysql_data:

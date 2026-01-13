@@ -1,10 +1,11 @@
 package com.operis.project.adapter.in.rest;
 
 import com.operis.project.adapter.in.rest.dto.ProjectDto;
+import com.operis.project.adapter.infrastructure.jwt.JWTConnectedUserResolver;
 import com.operis.project.core.domain.CreateProjectCommand;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.operis.project.adapter.in.rest.payload.CreateProjectPayload;
 import com.operis.project.core.domain.Project;
@@ -12,19 +13,25 @@ import com.operis.project.core.port.in.CreateProjectUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectController {
 
-    private CreateProjectUseCase createProjectUseCase;
+    private final CreateProjectUseCase createProjectUseCase;
+    private final JWTConnectedUserResolver jwtConnectedUserResolver;
 
-    public ResponseEntity<ProjectDto> createProject(@Valid CreateProjectPayload payload) {
+    @PostMapping
+    public ResponseEntity<ProjectDto> createProject(
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestBody @Valid CreateProjectPayload payload ) {
 
         // Etape 1 : Arrivée du JSON (Payload) -> Le controller le reçoit propre grâce à @Valid
 
         // Etape 2 : Transformation en objet Java Pur (Command) -> Le "Point d'entrée"
-        String connectedUser = "admin"; // Simulé pour l'instant
+
+        String connectedUser = jwtConnectedUserResolver.extractConnectedUserEmail(authorizationHeader); // Simulé pour l'instant
+
         CreateProjectCommand command = new CreateProjectCommand(
                 payload.name(),
                 payload.description(),

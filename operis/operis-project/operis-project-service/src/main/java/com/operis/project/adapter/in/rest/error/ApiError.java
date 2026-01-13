@@ -1,0 +1,23 @@
+package com.operis.project.adapter.in.rest.error;
+
+import java.util.List;
+
+public record ApiError(Integer statusCode, String httpStatus , String message, List<String> details) {
+
+    public ApiError {
+        if (statusCode == null) {
+            throw new IllegalArgumentException("statusCode cannot be null");
+        }
+        if (httpStatus == null) {
+            throw new IllegalArgumentException("httpStatus cannot be null");
+        }
+        if (message == null) {
+            throw new IllegalArgumentException("message cannot be null");
+        }
+    }
+
+    public ApiError(Integer statusCode, String httpStatus , String message) {
+        this(statusCode, httpStatus, message, null);
+    }
+
+}
