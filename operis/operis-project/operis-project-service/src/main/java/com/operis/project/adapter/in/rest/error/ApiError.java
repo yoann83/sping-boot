@@ -1,7 +1,9 @@
 package com.operis.project.adapter.in.rest.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record ApiError(Integer statusCode, String httpStatus , String message, List<String> details) {
 
     public ApiError {
@@ -19,5 +21,4 @@ public record ApiError(Integer statusCode, String httpStatus , String message, L
     public ApiError(Integer statusCode, String httpStatus , String message) {
         this(statusCode, httpStatus, message, null);
     }
-
 }

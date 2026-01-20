@@ -17,11 +17,11 @@ public class Project {
 
     public Project(String name, String description, String owner) {
         if(name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Project name cannot be null or empty");
+            throw new IllegalArgumentException("Project name cannot be null or empty.");
         }
 
         if(owner == null || owner.isBlank()) {
-            throw new IllegalArgumentException("Project owner cannot be null or empty");
+            throw new IllegalArgumentException("Project owner cannot be null or empty.");
         }
 
         this.name = name;

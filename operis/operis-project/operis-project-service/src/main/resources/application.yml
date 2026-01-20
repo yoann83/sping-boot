@@ -15,7 +15,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 code:
-  secret: mAvsZD2KqE2Kv6VpF+VkN1P3PT+2uq5z0g2ZxF0StSc=
+  secret: mAvsZD2KqE2Kv6VpF+VkN1P3PT+2uq5z0g2Zx-eF0StSc=
 
 logging:
   level:
