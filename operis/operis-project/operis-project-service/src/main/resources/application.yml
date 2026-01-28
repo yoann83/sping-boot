@@ -1,12 +1,14 @@
 server:
-  port: 9999
+  port: 8089
 
 spring:
+  # DataSource Configuration qui utilise MySQL
   datasource:
     url: jdbc:mysql://localhost:4444/operis_project?serverTimezone=UTC
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  # Hibernate Configuration jpa pour la gestion des entités
   jpa:
     hibernate:
       ddl-auto: update

@@ -56,9 +56,9 @@ class ProjectControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(post("/api/projects")
-                        .header("Authorization", "Bearer dummy-token")
                         .contentType(MediaType.APPLICATION_JSON) // constante MediaType
-                        .content(objectMapper.writeValueAsString(payload))
+                        .header("Authorization", "Bearer dummy-token") // Le token n'est pas vérifié dans ce test
+                        .content(objectMapper.writeValueAsString(payload)) // Sérialisation JSON
                 )
                 // 1. Vérifie le code HTTP 201
                 .andExpect(status().isCreated())

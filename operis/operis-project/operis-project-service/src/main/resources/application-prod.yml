@@ -1,0 +1,13 @@
+# application-prod.yml (Configuration de Production)
+
+springdoc:
+  api-docs:
+    enabled: false   # Coupe le JSON (/v3/api-docs)
+  swagger-ui:
+    enabled: false   # Coupe l'interface graphique (/swagger-ui.html)
+
+# Tu peux aussi en profiter pour désactiver la console H2 en prod par sécurité
+spring:
+  h2:
+    console:
+      enabled: false
