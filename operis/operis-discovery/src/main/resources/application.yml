@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: operis-discovery  # Le nom unique de ce service dans ton réseau.
+
+server:
+  port: 8761                # Le port standard pour Eureka.
+
+eureka:
+  client:
+    # C'est LUI le serveur, il n'a pas besoin de s'enregistrer
+    # auprès de lui-même (sinon il bouclerait à l'infini).
+    register-with-eureka: false
+
+    # Il n'a pas besoin de télécharger la liste des services
+    # depuis un autre serveur (puisque c'est lui qui détient la liste).
+    fetch-registry: false

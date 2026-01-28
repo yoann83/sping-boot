@@ -19,8 +19,8 @@
 
     <!-- MODULES -->
     <modules>
-
         <module>operis-project</module>
+        <module>operis-discovery</module>
     </modules>
 
     <properties>
