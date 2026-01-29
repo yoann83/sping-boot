@@ -1,9 +1,11 @@
+# Le nom unique de ce service dans ton réseau.
 spring:
   application:
-    name: operis-discovery  # Le nom unique de ce service dans ton réseau.
+    name: operis-discovery
 
+  # Le port standard pour Eureka.
 server:
-  port: 8761                # Le port standard pour Eureka.
+  port: 8761
 
 eureka:
   client:
@@ -14,3 +16,8 @@ eureka:
     # Il n'a pas besoin de télécharger la liste des services
     # depuis un autre serveur (puisque c'est lui qui détient la liste).
     fetch-registry: false
+    server:
+        # Désactive le mode survie qui cause l'alerte
+        enable-self-preservation: false
+        # Fréquence à laquelle Eureka nettoie les services morts (10 secondes)
+        eviction-interval-timer-in-ms: 10000

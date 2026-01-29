@@ -2,6 +2,8 @@ server:
   port: 8089
 
 spring:
+  application:
+    name: operis-project-service
   # DataSource Configuration qui utilise MySQL
   datasource:
     url: jdbc:mysql://localhost:4444/operis_project?serverTimezone=UTC
@@ -15,11 +17,18 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-
+# Configuration de sécurité pour JWT
 code:
   secret: mAvsZD2KqE2Kv6VpF+VkN1P3PT+2uq5z0g2Zx-eF0StSc=
-
+# Configuration du niveau de journalisation
 logging:
   level:
     root: INFO
     com.operis: DEBUG
+# Configuration Eureka Client pour l'enregistrement du service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://operis-discovery:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true

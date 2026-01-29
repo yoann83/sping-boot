@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
+// Annotation pour activer le serveur Eureka
 @EnableEurekaServer // Active les fonctionnalités de serveur de découverte
 @SpringBootApplication // Plus complet que @SpringBootConfiguration
 public class OperisDiscoveryApplication {

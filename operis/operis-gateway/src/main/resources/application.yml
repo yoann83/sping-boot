@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: operis-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: operis-project-service
+          # lb:// signifie Load Balancer (utilise le nom Eureka)
+          uri: lb://OPERIS-PROJECT-SERVICE
+          # Toutes les requêtes commençant par /project/ iront vers ce service
+          predicates:
+            - Path=/api/projects/**
+          # Ajouter un en-tête personnalisé pour indiquer la source de la requête
+          filters:
+            - AddRequestHeader=X-Request-Source, Gateway
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE:http://localhost:8761/eureka/}
+    # empêche le service gateway de s'enregistrer lui-même auprès d'Eureka
+    register-with-eureka: false
+    # permet au service gateway de récupérer les informations des autres services depuis Eureka (par défaut true)
+    fetch-registry: true
