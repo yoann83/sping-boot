@@ -22,13 +22,15 @@
         <module>operis-project</module>
         <module>operis-discovery</module>
         <module>operis-gateway</module>
+        <module>operis-config</module>
     </modules>
 
     <properties>
         <java.version>23</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- version pour Spring Cloud 2024.0.0 corresponds to Spring Boot 3.4.x -->
+        <!-- version pour Spring Cloud 2024.0.0 corresponds to Spring Boot 3.4.x - BOM (Bill of Materials) -->
+        <!-- Une liste centralisée des versions des dépendances Spring Cloud -->
         <spring-cloud.version>2024.0.0</spring-cloud.version>
         <!-- version pour Spring Cloud Gateway 2024.0.0 corresponds to Spring Boot 3.4.x -->
         <spring-cloud-gateway-dependencies.version>2024.0.0</spring-cloud-gateway-dependencies.version>

@@ -1,0 +1,18 @@
+# Le nom unique de ce service dans ton réseau.
+spring:
+  application:
+    name: operis-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/yoann83/operis-config-repo.git
+          username: ${GITHUB_USERNAME}
+          password: ${GITHUB_TOKEN}
+server:
+  port: 8888
+eureka:
+  client:
+    # Le serveur de configuration doit s'enregistrer auprès du serveur Eureka
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE:http://localhost:8761/eureka/}

@@ -20,6 +20,12 @@ services:
     container_name: operis-discovery
     ports:
       - "8761:8761"
+    healthcheck:
+      # On teste si la page d'accueil d'Eureka répond (nécessite curl dans l'image alpine)
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8761/" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - operis-network
 
@@ -54,6 +60,24 @@ services:
     environment:
       # URL pour qu'elle puisse contacter Eureka dans le réseau Docker
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://operis-discovery:8761/eureka/
+    networks:
+      - operis-network
+
+# Service pour le serveur de configuration operis-config
+  operis-config:
+    build:
+      context: . # On build depuis la racine pour que le COPY du Dockerfile fonctionne
+      dockerfile: operis-config/Dockerfile
+    container_name: operis-config
+    ports:
+      - "8888:8888"
+    env_file:
+      - .env # Charge tes GITHUB_TOKEN et GITHUB_USERNAME
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://operis-discovery:8761/eureka/
+    depends_on:
+      operis-discovery:
+        condition: service_healthy # Attends que Eureka soit réellement "prêt"
     networks:
       - operis-network
 
