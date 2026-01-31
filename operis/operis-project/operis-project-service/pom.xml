@@ -23,89 +23,106 @@
     </properties>
 
     <dependencies>
+<!-- Module core du projet qui donne accès aux entités JPA et aux DTO -->
         <dependency>
             <groupId>com.operis</groupId>
             <artifactId>operis-project-core</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+<!-- Spring Boot de base pour une application web avec validation et JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+<!-- Spring Boot validation pour la validation des données des requêtes HTTP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
+<!-- Spring Boot JPA pour l'accès aux bases de données via JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
+<!-- Lombok pour réduire le code boilerplate setters/getters, constructors, builders, etc. -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
+<!-- MySQL pour permettre à l'application de se connecter à une base de données MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
         </dependency>
-
+<!-- nimbus-jose-jwt pour la gestion des JSON Web Tokens (JWT) -->
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>${nimbus-jose-jwt.version}</version>
         </dependency>
-
+<!-- MapStruct pour le mapping automatique entre entités JPA et DTO -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
-
+<!-- Spring Boot pour les tests unitaires et d'intégration -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+<!-- H2 Database pour les tests en mémoire de la base de données -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- test avec Rest Assured moins verbeux -->
+<!-- Assure pour les tests d'API REST, moins verbeux -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
         </dependency>
+<!-- Rest Assured Spring Mock MVC pour l'intégration avec Spring Mock MVC -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-mock-mvc</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- Ajout de Swagger -->
+<!-- SpringDoc OpenAPI pour la génération automatique de la documentation Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc-openapi.version}</version>
         </dependency>
+
+<!-- Spring Cloud pour l'intégration avec Eureka et l'utilisation de Spring Cloud Commons -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-commons</artifactId>
         </dependency>
-
+<!-- Spring Cloud Netflix Eureka Client pour que le service puisse s'enregistrer auprès d'un serveur Eureka -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+<!-- Spring AOP pour la programmation orientée aspect (utilisé par Spring Retry) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+<!-- Spring Retry pour implémenter des mécanismes de retry automatiques sur les appels -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+<!-- Spring Cloud Config Client qui permet de récupérer la configuration depuis un serveur Config -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
     </dependencies>
 

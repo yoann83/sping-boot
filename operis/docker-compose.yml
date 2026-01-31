@@ -3,12 +3,17 @@ services:
     image: mysql:latest
     container_name: projectdb
     ports:
-      - "4444:3306"
+      - "3308:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: operis_project
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-proot"]
+      timeout: 5s
+      retries: 10
+      interval: 10s
     networks:
       - operis-network
 
@@ -32,14 +37,18 @@ services:
 # Service pour l'application operis-project
   operis-project-service:
     build:
-      context: . # Racine du projet
+      context: .
       dockerfile: operis-project/operis-project-service/Dockerfile
     container_name: operis-project-service
     ports:
       - "8089:8089"
     depends_on:
-      - projectdb
-      - operis-discovery
+      projectdb:
+        condition: service_healthy
+      operis-discovery:
+        condition: service_healthy
+      operis-config:
+        condition: service_started
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://projectdb:3306/operis_project?serverTimezone=UTC
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://operis-discovery:8761/eureka/

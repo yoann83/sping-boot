@@ -4,31 +4,22 @@ server:
 spring:
   application:
     name: operis-project-service
-  # DataSource Configuration qui utilise MySQL
-  datasource:
-    url: jdbc:mysql://localhost:4444/operis_project?serverTimezone=UTC
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  # Hibernate Configuration jpa pour la gestion des entités
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-# Configuration de sécurité pour JWT
-code:
-  secret: mAvsZD2KqE2Kv6VpF+VkN1P3PT+2uq5z0g2Zx-eF0StSc=
-# Configuration du niveau de journalisation
-logging:
-  level:
-    root: INFO
-    com.operis: DEBUG
-# Configuration Eureka Client pour l'enregistrement du service
+  cloud:
+    config:
+      fail-fast: true
+      # Configuration de la stratégie de retry pour la connexion au Config Server
+      retry:
+        initial-interval: 3000
+        max-interval: 10000
+        max-attempts: 10
+        multiplier: 1.5
+      discovery:
+        enabled: false
+  config:
+    # On donne l'URL directe dans le réseau Docker
+    import: "optional:configserver:http://operis-config:8888"
+
 eureka:
   client:
     service-url:
-      defaultZone: http://operis-discovery:8761/eureka/
-    fetch-registry: true
-    register-with-eureka: true
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE:http://operis-discovery:8761/eureka/}
